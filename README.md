@@ -17,7 +17,7 @@ That's easy: pip install tensorflow[and-cuda]
 ## 4. Installing OpenCV (~6h)
 By default, OpenCV does not deliver CUDA support, so we have to built it by ourselves. Caution, this process takes about 6h and looks like it freezes at the end, but it only takes time.
 To build, a build script of https://github.com/mdegans/nano_build_opencv has to be used, but a few things are changed in our version:
-- line 8: changed default version to build from 4.4.0 to 4.9.0. In case you want to build a different version, run the script like in the following `./build_opencv.sh 4.X.X
+- line 8: changed default version to build from 4.4.0 to 4.9.0. In case you want to build a different version, run the script like in the following `./build_opencv.sh 4.X.X`
 - line 106: turned off python2 build, we don't need that in our case
 - line 110: CUDA_ARCH_BIN targets now only 5.3, because at least the old 8.7 at the end of the list was causing problems.
 DO NOT RUN THIS SCRIPT AS SUDO
