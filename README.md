@@ -19,9 +19,11 @@ If you don't install a matching version, tensorflow will work but without cuda s
 ## 4. Installing OpenCV (~6h)
 By default, OpenCV does not deliver CUDA support, so we have to built it by ourselves. Caution, this process takes about 6h and looks like it freezes at the end, but it only takes time.
 To build, a build script of https://github.com/mdegans/nano_build_opencv has to be used, but a few things are changed in our version:
+- line 8: changed default version to build from 4.4.0 to 4.9.0. In case you want to build a different version, run the script like in the following `./build_opencv.sh 4.X.X`
 - line 106: turned off python2 build, we don't need that in our case
 - line 110: CUDA_ARCH_BIN targets now only 5.3, because at least the old 8.7 at the end of the list was causing problems.
-DO NOT RUN THIS SCRIPT AS SUDO
+The changed script is contained in this repository.
+*WARNING: DO NOT RUN THIS SCRIPT AS SUDO*.
 After installation, create a symlink of the freshly build opencv into your activated venv. The installed opencv will be probably in `/usr/local/lib/python3.11/site-packages/cv2`. The target location is in `<YOUR_VENV_PATH>/lib/python3.11/site-packages/cv2`.
 Now your venv is good to go.
 
@@ -29,5 +31,6 @@ Now your venv is good to go.
 There might occur an error with opencv and tensorflow about that there is not enough memory or whatever.
 To prevent errors like that, you need to export an env variable before, like in the following:
 `export LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libnvinfer.so.8:/usr/lib/aarch64-linux-gnu/libgomp.s:<YOUR_VENV_PATH>/lib/python3.11/site-packages/tensorflow_cpu_aws.libs/libgomp-cc9055c7.so.1.0.0`
+
 To not forget that, I recommend to append it to `~/.bashrc`.
 
